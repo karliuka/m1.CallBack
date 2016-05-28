@@ -1,0 +1,61 @@
+<?php
+/**
+ * Faonni
+ *  
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade module to newer
+ * versions in the future.
+ * 
+ * @package     Faonni_CallBack
+ * @copyright   Copyright (c) 2016 Karliuka Vitalii(karliuka.vitalii@gmail.com) 
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<div class="block block-callback">
+	<div class="block-title">
+		<strong><span><?php echo $this->__('Request a Callback') ?></span></strong>
+	</div>
+	<p><?php echo $this->__('Please submit the form and we will call you back.') ?></p>
+	<form action="<?php echo $this->getPostActionUrl() ?>" id="callback-form" method="post">
+		<input type="hidden" name="form_key" value="<?php echo $this->getFormKey() ?>"/>
+		<ul class="form-list">
+			<?php if (!$this->isLoggedIn()) : ?>
+				<li class="fields">
+					<label for="callback-firstname" class="required"><em>*</em><?php echo $this->__('First Name') ?></label>
+					<div class="input-box">
+						<input type="text" name="firstname" id="callback-firstname" class="input-text required-entry" value="" />
+					</div>
+				</li>
+				<li class="fields">
+					<label for="callback-lastname" class="required"><em>*</em><?php echo $this->__('Last Name') ?></label>
+					<div class="input-box">
+						<input type="text" name="lastname" id="callback-lastname" class="input-text required-entry" value="" />
+					</div>
+				</li>
+			<?php endif ?>	
+			<li class="fields">
+				<label for="callback-phone" class="required"><em>*</em><?php echo $this->__('Phone') ?></label>
+				<div class="input-box">
+					<input type="text" name="phone" id="callback-phone" class="input-text required-entry"/>
+				</div>
+			</li>
+		</ul>
+		<div class="actions">
+			<button type="submit" class="button"><span><span><?php echo $this->__('Send') ?></span></span></button>
+		</div>			
+	</form>
+    <script type="text/javascript">
+    //<![CDATA[
+        var dataForm = new VarienForm('callback-form', true);
+    //]]>
+    </script>	
+</div>

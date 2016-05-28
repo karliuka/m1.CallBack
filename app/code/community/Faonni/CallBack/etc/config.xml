@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Faonni
+ *  
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade module to newer
+ * versions in the future.
+ * 
+ * @package     Faonni_CallBack
+ * @copyright   Copyright (c) 2016 Karliuka Vitalii(karliuka.vitalii@gmail.com) 
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <Faonni_CallBack>
+            <version>1.2.0</version>
+        </Faonni_CallBack>
+    </modules>
+    <global>
+        <blocks>
+            <faonni_callback>
+                <class>Faonni_CallBack_Block</class>
+            </faonni_callback>
+        </blocks>
+        <helpers>
+            <faonni_callback>
+                <class>Faonni_CallBack_Helper</class>
+            </faonni_callback>
+        </helpers>		
+        <models>
+            <faonni_callback>
+                <class>Faonni_CallBack_Model</class>
+                <resourceModel>faonni_callback_resource</resourceModel>
+            </faonni_callback>
+            <faonni_callback_resource>
+                <class>Faonni_CallBack_Model_Resource</class>
+                <entities>
+                    <request>
+                        <table>faonni_callback_request</table>
+                    </request>
+                </entities>
+            </faonni_callback_resource>
+        </models>
+        <resources>
+            <faonni_callback_setup>
+                <setup>
+                    <module>Faonni_CallBack</module>
+                    <class>Mage_Core_Model_Resource_Setup</class>
+                </setup>
+            </faonni_callback_setup>
+        </resources>
+        <template>
+            <email>
+                <promo_callback_email_template translate="label" module="faonni_callback">
+                    <label>Request Call Back Admin Notification</label>
+                    <file>faonni/callback/notification.html</file>
+                    <type>html</type>
+                </promo_callback_email_template>
+            </email>
+        </template>
+    </global>
+    <frontend>
+        <routers>
+            <faonni_callback>
+                <use>standard</use>
+                <args>
+                    <module>Faonni_CallBack</module>
+                    <frontName>callback</frontName>
+                </args>
+            </faonni_callback>
+        </routers>
+        <layout>
+            <updates>
+                <faonni_callback>
+                    <file>faonni/callback.xml</file>
+                </faonni_callback>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Faonni_CallBack>
+                    <files>
+                        <default>Faonni_CallBack.csv</default>
+                    </files>
+                </Faonni_CallBack>
+            </modules>
+        </translate>			
+        <events>
+            <faonni_callback_request_create>
+                <observers>
+                    <callback_request_send_admin_email>
+                        <class>faonni_callback/observer</class>
+                        <method>sendAdminEmail</method>
+                    </callback_request_send_admin_email>
+                </observers>
+            </faonni_callback_request_create>
+        </events>
+    </frontend>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Faonni_CallBack before="Mage_Adminhtml">Faonni_CallBack_Adminhtml</Faonni_CallBack>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <faonni_callback>
+                    <file>faonni/callback.xml</file>
+                </faonni_callback>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Faonni_CallBack>
+                    <files>
+                        <default>Faonni_CallBack.csv</default>
+                    </files>
+                </Faonni_CallBack>
+            </modules>
+        </translate>		
+    </adminhtml>
+    <default>
+        <promo>
+            <callback>
+				<active>1</active>					
+				<enabled_email>0</enabled_email>
+				<recipient_email></recipient_email>
+				<sender_email_identity>custom2</sender_email_identity>
+				<email_template>promo_callback_email_template</email_template>
+            </callback>
+        </promo>
+    </default>		
+</config>
